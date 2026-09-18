@@ -1,9 +1,6 @@
 package com.phoneshop.pos.service;
 
 import com.lowagie.text.*;
-import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.*;
 import com.phoneshop.pos.config.AppConfig;
 import com.phoneshop.pos.model.Sale;
@@ -12,7 +9,7 @@ import com.phoneshop.pos.util.FormatUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

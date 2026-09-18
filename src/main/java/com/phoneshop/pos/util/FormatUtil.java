@@ -3,10 +3,8 @@ package com.phoneshop.pos.util;
 import com.phoneshop.pos.config.AppConfig;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class FormatUtil {
     private static final DecimalFormat CURRENCY_FORMAT = new DecimalFormat("#,##0.00");

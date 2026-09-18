@@ -3,7 +3,6 @@ package com.phoneshop.pos.util;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
-import javafx.stage.StageStyle;
 
 import java.util.Optional;
 
