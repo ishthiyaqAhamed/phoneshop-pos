@@ -5,6 +5,7 @@ dist/
 *.jar
 *.war
 *.ear
+dependency-reduced-pom.xml
 
 # Environment & Secrets (NEVER COMMIT .env)
 .env

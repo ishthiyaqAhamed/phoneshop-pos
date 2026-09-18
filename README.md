@@ -111,33 +111,32 @@ mvn clean compile javafx:run
 & "C:\Program Files\NetBeans-25\netbeans\java\maven\bin\mvn.cmd" javafx:run
 ```
 
-### Packaging into a Fat Executable JAR:
+### 1-Click Launch Options:
+- **Desktop Shortcut**: Double-click the **`Phone Shop POS`** shortcut on your Windows Desktop.
+- **Batch Launcher**: Double-click [`Launch-POS.bat`](file:///c:/Users/Dell/Desktop/phoneshop-pos/Launch-POS.bat) in the root directory.
+- **Native Standalone Executable**:
+  ```powershell
+  .\dist\PhoneShopPOS\PhoneShopPOS.exe
+  ```
+  *(Runs completely standalone with its own bundled runtime — no Java installation required on the client machine!)*
+
+### Rebuilding Standalone Package:
 ```powershell
-mvn clean package
-```
-The executable fat JAR will be located at:
-```
-target/pos-1.0.0.jar
+.\build-dist.ps1
 ```
 
-You can run it with:
+### Creating / Re-creating Desktop Shortcut:
 ```powershell
-java -jar target/pos-1.0.0.jar
+.\Create-Desktop-Shortcut.ps1
 ```
 
 ---
 
-## Creating a Native Windows Installer (`jpackage`)
+## Technical Stack
+- **Java**: OpenJDK 17 (LTS)
+- **UI Framework**: JavaFX 21 (Modern Dark POS Glassmorphism Theme)
+- **Database**: Neon Cloud PostgreSQL / SQLite offline fallback via HikariCP connection pool
+- **Security**: Salted BCrypt password hashing & role-based access control (Admin / Cashier)
+- **Barcode & Labeling**: ZXing Barcode Engine (Code-128 & EAN-13) + Java AWT Label Tag Rendering
+- **Invoicing & Receipts**: OpenPDF (iText) A5 invoice generation & 80mm ESC/POS Thermal Receipt formatting
 
-To bundle the application and Java Runtime into a native `.msi` or `.exe` Windows installer:
-
-```powershell
-jpackage --type msi `
-  --input target `
-  --name "PhoneShopPOS" `
-  --main-jar pos-1.0.0.jar `
-  --main-class com.phoneshop.pos.MainLauncher `
-  --app-version 1.0.0 `
-  --win-shortcut `
-  --win-menu
-```
