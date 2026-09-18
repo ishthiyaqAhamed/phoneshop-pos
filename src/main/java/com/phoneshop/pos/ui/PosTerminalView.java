@@ -558,7 +558,7 @@ public class PosTerminalView extends BorderPane {
                     sale.setCustomerName(c.getName());
                     sale.setCustomerPhone(c.getPhone());
                 } else {
-                    sale.setCustomerName(custName.isBlank() ? "Walk-in Customer" : custName);
+                    sale.setCustomerName(custName == null || custName.isBlank() ? "Walk-in Customer" : custName.trim());
                 }
 
                 sale.setSubtotal(finalSubtotal);

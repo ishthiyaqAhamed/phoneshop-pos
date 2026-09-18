@@ -134,19 +134,32 @@ public class BarcodeLabelView extends VBox {
         productCombo.setItems(FXCollections.observableArrayList(list));
         if (!list.isEmpty()) {
             productCombo.setValue(list.get(0));
+        } else {
+            updatePreview();
         }
     }
 
     private Product buildCurrentProduct() {
         Product p = new Product();
-        p.setBarcode(customCodeField.getText().isBlank() ? "195949012345" : customCodeField.getText().trim());
-        p.setName(customNameField.getText().isBlank() ? "Sample Phone" : customNameField.getText().trim());
-        try {
-            p.setSellingPrice(Double.parseDouble(customPriceField.getText().trim()));
-        } catch (Exception e) {
+        String code = customCodeField.getText();
+        p.setBarcode((code == null || code.isBlank()) ? "195949012345" : code.trim());
+
+        String name = customNameField.getText();
+        p.setName((name == null || name.isBlank()) ? "Sample Phone" : name.trim());
+
+        String price = customPriceField.getText();
+        if (price != null && !price.isBlank()) {
+            try {
+                p.setSellingPrice(Double.parseDouble(price.trim()));
+            } catch (Exception e) {
+                p.setSellingPrice(0.0);
+            }
+        } else {
             p.setSellingPrice(0.0);
         }
-        p.setWarrantyPeriod(customWarrantyField.getText().isBlank() ? "1 Year Warranty" : customWarrantyField.getText().trim());
+
+        String warranty = customWarrantyField.getText();
+        p.setWarrantyPeriod((warranty == null || warranty.isBlank()) ? "1 Year Warranty" : warranty.trim());
         return p;
     }
 

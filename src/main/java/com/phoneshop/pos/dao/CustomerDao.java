@@ -62,13 +62,15 @@ public class CustomerDao {
     }
 
     public Customer getOrCreate(String name, String phone, String email, String address) {
-        Customer existing = findByPhone(phone);
-        if (existing != null) {
-            return existing;
+        if (phone != null && !phone.isBlank()) {
+            Customer existing = findByPhone(phone.trim());
+            if (existing != null) {
+                return existing;
+            }
         }
         Customer newCust = new Customer();
         newCust.setName(name == null || name.isBlank() ? "Walk-in Customer" : name.trim());
-        newCust.setPhone(phone.trim());
+        newCust.setPhone(phone == null || phone.isBlank() ? "N/A-" + System.currentTimeMillis() : phone.trim());
         newCust.setEmail(email);
         newCust.setAddress(address);
         create(newCust);

@@ -15,10 +15,11 @@ public class UserDao {
     private static final Logger logger = LoggerFactory.getLogger(UserDao.class);
 
     public User findByUsername(String username) {
-        String sql = "SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND is_active = TRUE";
+        if (username == null || username.isBlank()) return null;
+        String sql = "SELECT * FROM users WHERE LOWER(username) = LOWER(?)";
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, username);
+            ps.setString(1, username.trim());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return mapUser(rs);

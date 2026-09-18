@@ -320,20 +320,25 @@ public class ProductManagementView extends VBox {
         saveBtn.getStyleClass().add("btn-primary");
         saveBtn.setOnAction(e -> {
             try {
-                String barcode = barcodeField.getText().trim();
-                String name = nameField.getText().trim();
-                String brand = brandField.getText().trim();
-                String category = catCombo.getValue();
-                String imei = imeiField.getText().trim();
-                String storageRam = storageRamField.getText().trim();
-                String color = colorField.getText().trim();
-                String condition = conditionCombo.getValue();
-                double costPrice = Double.parseDouble(costPriceField.getText().trim());
-                double sellingPrice = Double.parseDouble(sellingPriceField.getText().trim());
-                int stockQty = Integer.parseInt(stockQtyField.getText().trim());
-                int minStock = Integer.parseInt(minStockField.getText().trim());
+                String barcode = barcodeField.getText() != null ? barcodeField.getText().trim() : "";
+                String name = nameField.getText() != null ? nameField.getText().trim() : "";
+                String brand = brandField.getText() != null ? brandField.getText().trim() : "";
+                String category = catCombo.getValue() != null ? catCombo.getValue() : "SMARTPHONES";
+                String imei = imeiField.getText() != null ? imeiField.getText().trim() : "";
+                String storageRam = storageRamField.getText() != null ? storageRamField.getText().trim() : "";
+                String color = colorField.getText() != null ? colorField.getText().trim() : "";
+                String condition = conditionCombo.getValue() != null ? conditionCombo.getValue() : "BRAND_NEW";
+                String costPriceStr = costPriceField.getText() != null ? costPriceField.getText().trim() : "0.00";
+                String sellingPriceStr = sellingPriceField.getText() != null ? sellingPriceField.getText().trim() : "0.00";
+                String stockQtyStr = stockQtyField.getText() != null ? stockQtyField.getText().trim() : "0";
+                String minStockStr = minStockField.getText() != null ? minStockField.getText().trim() : "3";
+                
+                double costPrice = Double.parseDouble(costPriceStr.isBlank() ? "0.00" : costPriceStr);
+                double sellingPrice = Double.parseDouble(sellingPriceStr.isBlank() ? "0.00" : sellingPriceStr);
+                int stockQty = Integer.parseInt(stockQtyStr.isBlank() ? "0" : stockQtyStr);
+                int minStock = Integer.parseInt(minStockStr.isBlank() ? "3" : minStockStr);
                 String warranty = warrantyCombo.getValue();
-                String desc = descField.getText().trim();
+                String desc = descField.getText() != null ? descField.getText().trim() : "";
 
                 if (barcode.isBlank() || name.isBlank() || brand.isBlank()) {
                     DialogUtil.showWarning("Required Fields", "Please fill in Barcode, Name, Brand, and Selling Price.");

@@ -170,9 +170,9 @@ public class UserManagementView extends VBox {
         Button saveBtn = new Button("Create Account");
         saveBtn.getStyleClass().add("btn-primary");
         saveBtn.setOnAction(e -> {
-            String u = usernameF.getText().trim();
-            String name = fullNameF.getText().trim();
-            String p = passF.getText();
+            String u = usernameF.getText() != null ? usernameF.getText().trim() : "";
+            String name = fullNameF.getText() != null ? fullNameF.getText().trim() : "";
+            String p = passF.getText() != null ? passF.getText() : "";
 
             if (u.isBlank() || name.isBlank() || p.isBlank()) {
                 DialogUtil.showWarning("Missing Fields", "Please complete all fields.");
@@ -237,7 +237,7 @@ public class UserManagementView extends VBox {
         Button saveBtn = new Button("Update Password");
         saveBtn.getStyleClass().add("btn-primary");
         saveBtn.setOnAction(e -> {
-            String p = newPassF.getText();
+            String p = newPassF.getText() != null ? newPassF.getText() : "";
             if (p.isBlank()) {
                 DialogUtil.showWarning("Empty Password", "Please type a new password.");
                 return;

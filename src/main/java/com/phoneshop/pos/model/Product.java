@@ -185,7 +185,7 @@ public class Product {
     }
 
     public String getFullDisplayName() {
-        StringBuilder sb = new StringBuilder(name);
+        StringBuilder sb = new StringBuilder(name != null ? name : "");
         if (storageRam != null && !storageRam.isBlank()) {
             sb.append(" (").append(storageRam);
             if (color != null && !color.isBlank()) {
@@ -196,5 +196,14 @@ public class Product {
             sb.append(" (").append(color).append(")");
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        String display = getFullDisplayName();
+        if (barcode != null && !barcode.isBlank()) {
+            return display + " [" + barcode + "]";
+        }
+        return display;
     }
 }

@@ -242,20 +242,26 @@ public class SaleDao {
 
     public String generateNextInvoiceNumber() {
         String prefix = "INV-" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "-";
-        String sql = "SELECT COUNT(*) FROM sales WHERE invoice_number LIKE ?";
+        String sql = "SELECT invoice_number FROM sales WHERE invoice_number LIKE ? ORDER BY id DESC LIMIT 1";
         try (Connection conn = DatabaseConfig.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, prefix + "%");
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    int count = rs.getInt(1) + 1;
-                    return String.format("%s%04d", prefix, count);
+                    String lastInv = rs.getString(1);
+                    if (lastInv != null && lastInv.startsWith(prefix)) {
+                        String numPart = lastInv.substring(prefix.length());
+                        try {
+                            int lastNum = Integer.parseInt(numPart);
+                            return String.format("%s%04d", prefix, lastNum + 1);
+                        } catch (NumberFormatException ignored) {}
+                    }
                 }
             }
         } catch (SQLException e) {
             logger.error("Error generating invoice number", e);
         }
-        return prefix + System.currentTimeMillis() % 10000;
+        return String.format("%s0001", prefix);
     }
 
     private Sale mapSale(ResultSet rs) throws SQLException {
