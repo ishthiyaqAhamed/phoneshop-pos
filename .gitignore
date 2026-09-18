@@ -1,0 +1,37 @@
+# Build artifacts
+target/
+build/
+dist/
+*.jar
+*.war
+*.ear
+
+# Environment & Secrets (NEVER COMMIT .env)
+.env
+*.env.local
+*.env.production
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+.settings/
+.project
+.classpath
+.apt_generated
+.nb-gradle/
+nbproject/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs & Temporary Database Cache
+*.log
+logs/
+pos_offline.db
+pos_offline.db*
