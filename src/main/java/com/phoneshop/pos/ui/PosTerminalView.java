@@ -7,6 +7,7 @@ import com.phoneshop.pos.model.*;
 import com.phoneshop.pos.util.AppSession;
 import com.phoneshop.pos.util.DialogUtil;
 import com.phoneshop.pos.util.FormatUtil;
+import com.phoneshop.pos.util.ThemeManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -221,7 +222,6 @@ public class PosTerminalView extends BorderPane {
     private VBox createCartSection() {
         VBox box = new VBox(12);
         box.getStyleClass().add("card");
-        box.setStyle("-fx-background-color: #131d31;");
 
         // Header
         HBox headerBox = new HBox(8);
@@ -243,10 +243,11 @@ public class PosTerminalView extends BorderPane {
 
         // Customer Info Card
         VBox customerBox = new VBox(6);
-        customerBox.setStyle("-fx-background-color: #1e293b; -fx-padding: 10; -fx-background-radius: 8; -fx-border-color: #334155; -fx-border-radius: 8;");
+        customerBox.getStyleClass().add("card");
+        customerBox.setStyle("-fx-padding: 10;");
         
         Label custTitle = new Label("Customer Info (Warranty & Receipt)");
-        custTitle.setStyle("-fx-text-fill: #94a3b8; -fx-font-size: 11px; -fx-font-weight: bold;");
+        custTitle.getStyleClass().add("card-subtitle");
 
         HBox custInputs = new HBox(8);
         customerPhoneField.setPromptText("Phone (e.g. 0771234567)");
@@ -265,7 +266,8 @@ public class PosTerminalView extends BorderPane {
 
         // Totals & Checkout Box
         VBox checkoutBox = new VBox(8);
-        checkoutBox.setStyle("-fx-background-color: #1e293b; -fx-padding: 14; -fx-background-radius: 10; -fx-border-color: #334155; -fx-border-radius: 10;");
+        checkoutBox.getStyleClass().add("card");
+        checkoutBox.setStyle("-fx-padding: 14;");
 
         HBox subtotalRow = createSummaryLine("Subtotal:", subtotalLabel, false);
         HBox discountRow = createSummaryLine("Discount:", discountLabel, false);
@@ -468,38 +470,41 @@ public class PosTerminalView extends BorderPane {
 
         VBox root = new VBox(16);
         root.setPadding(new Insets(24));
-        root.setStyle("-fx-background-color: #0f172a;");
+        root.getStyleClass().add("content-area");
         root.setPrefSize(420, 520);
 
         Label header = new Label("Checkout Payment");
-        header.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        header.getStyleClass().add("card-title");
+        header.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         // Amount Due Banner
         VBox dueCard = new VBox(4);
-        dueCard.setStyle("-fx-background-color: #1e293b; -fx-padding: 14; -fx-background-radius: 8; -fx-alignment: CENTER;");
+        dueCard.getStyleClass().add("card");
+        dueCard.setStyle("-fx-padding: 14; -fx-alignment: CENTER;");
         Label dueTitle = new Label("Total Amount Due");
-        dueTitle.setStyle("-fx-text-fill: #94a3b8; -fx-font-size: 12px;");
+        dueTitle.getStyleClass().add("stat-label");
         Label dueAmount = new Label(FormatUtil.formatCurrency(finalGrandTotal));
         dueAmount.setStyle("-fx-text-fill: #10b981; -fx-font-size: 26px; -fx-font-weight: bold;");
         dueCard.getChildren().addAll(dueTitle, dueAmount);
 
         // Payment Method Combo
         Label methodLabel = new Label("Payment Method");
-        methodLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-weight: bold;");
+        methodLabel.getStyleClass().add("stat-label");
         ComboBox<PaymentMethod> methodCombo = new ComboBox<>(FXCollections.observableArrayList(PaymentMethod.values()));
         methodCombo.setValue(PaymentMethod.CASH);
         methodCombo.setMaxWidth(Double.MAX_VALUE);
 
         // Amount Paid Input
         Label paidLabel = new Label("Amount Received (Cash Tendered)");
-        paidLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-weight: bold;");
+        paidLabel.getStyleClass().add("stat-label");
         TextField paidField = new TextField(String.valueOf(finalGrandTotal));
         paidField.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         // Change Due Label
         HBox changeRow = new HBox();
         Label cLabel = new Label("Change Due:");
-        cLabel.setStyle("-fx-text-fill: #94a3b8; -fx-font-size: 14px; -fx-font-weight: bold;");
+        cLabel.getStyleClass().add("stat-label");
+        cLabel.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
         HBox.setHgrow(cLabel, Priority.ALWAYS);
         Label changeVal = new Label("Rs. 0.00");
         changeVal.setStyle("-fx-text-fill: #38bdf8; -fx-font-size: 16px; -fx-font-weight: bold;");
@@ -605,6 +610,7 @@ public class PosTerminalView extends BorderPane {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+        ThemeManager.applyCurrentTheme(scene);
         payStage.setScene(scene);
         payStage.showAndWait();
     }

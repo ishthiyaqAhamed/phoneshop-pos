@@ -35,7 +35,8 @@ public class BarcodeLabelView extends VBox {
         this.setPadding(new Insets(20));
 
         Label pageTitle = new Label("Barcode & Price Tag Label Generator");
-        pageTitle.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        pageTitle.getStyleClass().add("card-title");
+        pageTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         HBox split = new HBox(20);
 

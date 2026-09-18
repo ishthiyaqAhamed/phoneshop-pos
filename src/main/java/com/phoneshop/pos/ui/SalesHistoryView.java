@@ -31,7 +31,8 @@ public class SalesHistoryView extends VBox {
         topBar.setAlignment(Pos.CENTER_LEFT);
 
         Label pageTitle = new Label("Sales Invoices & Transaction History");
-        pageTitle.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        pageTitle.getStyleClass().add("card-title");
+        pageTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         HBox.setHgrow(pageTitle, Priority.ALWAYS);
 
         searchField.setPromptText("Search invoice #, customer, or cashier...");

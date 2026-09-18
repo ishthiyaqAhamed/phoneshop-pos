@@ -3,6 +3,7 @@ package com.phoneshop.pos.ui;
 import com.phoneshop.pos.model.Product;
 import com.phoneshop.pos.service.BarcodeService;
 import com.phoneshop.pos.util.DialogUtil;
+import com.phoneshop.pos.util.ThemeManager;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -29,12 +30,13 @@ public class BarcodePrintDialog extends Stage {
 
         VBox root = new VBox(16);
         root.setPadding(new Insets(24));
-        root.setStyle("-fx-background-color: #0f172a;");
+        root.getStyleClass().add("content-area");
         root.setPrefSize(420, 460);
         root.setAlignment(Pos.CENTER);
 
         Label titleLabel = new Label("Product Barcode & Price Tag");
-        titleLabel.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 16px; -fx-font-weight: bold;");
+        titleLabel.getStyleClass().add("card-title");
+        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         // Barcode Preview Image
         int labelWidth = 320;
@@ -42,12 +44,12 @@ public class BarcodePrintDialog extends Stage {
         ImageView previewImage = new ImageView(barcodeService.generateProductPriceTagFxImage(product, labelWidth, labelHeight));
         previewImage.setFitWidth(labelWidth);
         previewImage.setFitHeight(labelHeight);
-        previewImage.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 8, 0, 0, 2);");
+        previewImage.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 8, 0, 0, 2);");
 
         HBox countBox = new HBox(12);
         countBox.setAlignment(Pos.CENTER);
         Label countLabel = new Label("Number of Labels:");
-        countLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-weight: bold;");
+        countLabel.getStyleClass().add("stat-label");
         Spinner<Integer> labelSpinner = new Spinner<>(1, 100, 1);
         labelSpinner.setPrefWidth(90);
         countBox.getChildren().addAll(countLabel, labelSpinner);
@@ -93,6 +95,7 @@ public class BarcodePrintDialog extends Stage {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+        ThemeManager.applyCurrentTheme(scene);
         setScene(scene);
     }
 }

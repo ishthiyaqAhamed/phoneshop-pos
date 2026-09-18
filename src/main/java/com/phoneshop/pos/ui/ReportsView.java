@@ -29,7 +29,6 @@ public class ReportsView extends ScrollPane {
     public ReportsView() {
         this.getStyleClass().add("content-area");
         this.setFitToWidth(true);
-        this.setStyle("-fx-background-color: #0f172a; -fx-background: #0f172a;");
 
         VBox content = new VBox(18);
         content.setPadding(new Insets(20));
@@ -37,7 +36,8 @@ public class ReportsView extends ScrollPane {
         // Header
         HBox topBar = new HBox();
         Label pageTitle = new Label("Financial Reports & Sales Analytics");
-        pageTitle.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        pageTitle.getStyleClass().add("card-title");
+        pageTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         HBox.setHgrow(pageTitle, Priority.ALWAYS);
 
         Button refreshBtn = new Button("🔄 Refresh Metrics");
@@ -96,7 +96,7 @@ public class ReportsView extends ScrollPane {
         Label t = new Label(title);
         t.getStyleClass().add("stat-label");
         valLabel.getStyleClass().add("stat-number");
-        subLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-size: 11px;");
+        subLabel.getStyleClass().add("card-subtitle");
         card.getChildren().addAll(t, valLabel, subLabel);
         return card;
     }
@@ -117,20 +117,22 @@ public class ReportsView extends ScrollPane {
         Map<String, Integer> topSelling = summary.getTopSellingProducts();
         if (topSelling.isEmpty()) {
             Label empty = new Label("No sales data recorded yet.");
-            empty.setStyle("-fx-text-fill: #64748b;");
+            empty.getStyleClass().add("card-subtitle");
             topSellingContainer.getChildren().add(empty);
         } else {
             int rank = 1;
             for (Map.Entry<String, Integer> entry : topSelling.entrySet()) {
                 HBox row = new HBox(8);
                 row.setAlignment(Pos.CENTER_LEFT);
-                row.setStyle("-fx-background-color: #1e293b; -fx-padding: 8 12; -fx-background-radius: 6;");
+                row.getStyleClass().add("badge");
+                row.setStyle("-fx-padding: 8 12; -fx-alignment: CENTER_LEFT;");
 
                 Label rLabel = new Label("#" + (rank++));
                 rLabel.setStyle("-fx-text-fill: #38bdf8; -fx-font-weight: bold; -fx-min-width: 28px;");
 
                 Label nameLabel = new Label(entry.getKey());
-                nameLabel.setStyle("-fx-text-fill: #f8fafc; -fx-font-weight: 500;");
+                nameLabel.getStyleClass().add("card-title");
+                nameLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: 500;");
                 HBox.setHgrow(nameLabel, Priority.ALWAYS);
 
                 Label qtyBadge = new Label(entry.getValue() + " sold");
@@ -146,20 +148,22 @@ public class ReportsView extends ScrollPane {
         Map<String, Double> paymentMap = reportDao.getSalesByPaymentMethod();
         if (paymentMap.isEmpty()) {
             Label empty = new Label("No payment transactions recorded yet.");
-            empty.setStyle("-fx-text-fill: #64748b;");
+            empty.getStyleClass().add("card-subtitle");
             paymentMethodsContainer.getChildren().add(empty);
         } else {
             for (Map.Entry<String, Double> entry : paymentMap.entrySet()) {
                 HBox row = new HBox(8);
                 row.setAlignment(Pos.CENTER_LEFT);
-                row.setStyle("-fx-background-color: #1e293b; -fx-padding: 8 12; -fx-background-radius: 6;");
+                row.getStyleClass().add("badge");
+                row.setStyle("-fx-padding: 8 12; -fx-alignment: CENTER_LEFT;");
 
                 Label methodLabel = new Label(entry.getKey());
-                methodLabel.setStyle("-fx-text-fill: #f8fafc; -fx-font-weight: bold;");
+                methodLabel.getStyleClass().add("card-title");
+                methodLabel.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
                 HBox.setHgrow(methodLabel, Priority.ALWAYS);
 
                 Label amountLabel = new Label(FormatUtil.formatCurrency(entry.getValue()));
-                amountLabel.setStyle("-fx-text-fill: #34d399; -fx-font-weight: bold;");
+                amountLabel.setStyle("-fx-text-fill: #10b981; -fx-font-weight: bold;");
 
                 row.getChildren().addAll(methodLabel, amountLabel);
                 paymentMethodsContainer.getChildren().add(row);

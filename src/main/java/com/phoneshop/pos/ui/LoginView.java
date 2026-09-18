@@ -19,7 +19,6 @@ public class LoginView extends StackPane {
 
     public LoginView() {
         this.getStyleClass().add("content-area");
-        this.setStyle("-fx-background-color: #0b1120;");
 
         VBox loginCard = new VBox(16);
         loginCard.getStyleClass().add("card");
@@ -35,10 +34,11 @@ public class LoginView extends StackPane {
         iconCircle.getChildren().addAll(circle, iconLabel);
 
         Label titleLabel = new Label(AppConfig.getShopName());
-        titleLabel.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        titleLabel.getStyleClass().add("card-title");
+        titleLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
         Label subtitleLabel = new Label("Point of Sale & Inventory Terminal");
-        subtitleLabel.setStyle("-fx-text-fill: #94a3b8; -fx-font-size: 12px;");
+        subtitleLabel.getStyleClass().add("card-subtitle");
 
         VBox headerBox = new VBox(6, iconCircle, titleLabel, subtitleLabel);
         headerBox.setAlignment(Pos.CENTER);
@@ -48,12 +48,12 @@ public class LoginView extends StackPane {
         formBox.setAlignment(Pos.CENTER_LEFT);
 
         Label userLabel = new Label("Username / Staff ID");
-        userLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-size: 12px; -fx-font-weight: bold;");
+        userLabel.getStyleClass().add("stat-label");
         usernameField.setPromptText("e.g. admin or cashier1");
         usernameField.setPrefHeight(38);
 
         Label passLabel = new Label("Password");
-        passLabel.setStyle("-fx-text-fill: #cbd5e1; -fx-font-size: 12px; -fx-font-weight: bold;");
+        passLabel.getStyleClass().add("stat-label");
         passwordField.setPromptText("Enter your password");
         passwordField.setPrefHeight(38);
 
@@ -73,10 +73,11 @@ public class LoginView extends StackPane {
 
         // Quick login demo buttons for easy switching between Admin and 2 Cashiers
         VBox demoBox = new VBox(8);
-        demoBox.setStyle("-fx-background-color: #131d31; -fx-padding: 12; -fx-background-radius: 8; -fx-border-color: #334155; -fx-border-radius: 8;");
+        demoBox.getStyleClass().add("card");
+        demoBox.setStyle("-fx-padding: 12;");
         
         Label demoTitle = new Label("Quick Access Accounts:");
-        demoTitle.setStyle("-fx-text-fill: #64748b; -fx-font-size: 10px; -fx-font-weight: bold;");
+        demoTitle.getStyleClass().add("stat-label");
 
         HBox demoButtons = new HBox(8);
         demoButtons.setAlignment(Pos.CENTER);

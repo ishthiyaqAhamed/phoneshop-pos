@@ -36,7 +36,8 @@ public class InventoryDashboardView extends VBox {
         // Top Header
         HBox topBar = new HBox();
         Label pageTitle = new Label("Stock Valuation & Inventory Dashboard");
-        pageTitle.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        pageTitle.getStyleClass().add("card-title");
+        pageTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         HBox.setHgrow(pageTitle, Priority.ALWAYS);
 
         Button refreshBtn = new Button("🔄 Refresh Data");

@@ -4,6 +4,7 @@ import com.phoneshop.pos.dao.UserDao;
 import com.phoneshop.pos.model.Role;
 import com.phoneshop.pos.model.User;
 import com.phoneshop.pos.util.DialogUtil;
+import com.phoneshop.pos.util.ThemeManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,7 +34,8 @@ public class UserManagementView extends VBox {
         topBar.setAlignment(Pos.CENTER_LEFT);
 
         Label pageTitle = new Label("Staff & Cashier User Accounts");
-        pageTitle.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 18px; -fx-font-weight: bold;");
+        pageTitle.getStyleClass().add("card-title");
+        pageTitle.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
         HBox.setHgrow(pageTitle, Priority.ALWAYS);
 
         Button addStaffBtn = new Button("＋ Add New Staff Account");
@@ -145,11 +147,12 @@ public class UserManagementView extends VBox {
 
         VBox root = new VBox(14);
         root.setPadding(new Insets(24));
-        root.setStyle("-fx-background-color: #0f172a;");
+        root.getStyleClass().add("content-area");
         root.setPrefSize(380, 420);
 
         Label title = new Label("Add New Staff / Cashier");
-        title.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 16px; -fx-font-weight: bold;");
+        title.getStyleClass().add("card-title");
+        title.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         TextField usernameF = new TextField();
         usernameF.setPromptText("Username (e.g. cashier3)");
@@ -211,6 +214,7 @@ public class UserManagementView extends VBox {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+        ThemeManager.applyCurrentTheme(scene);
         dialog.setScene(scene);
         dialog.showAndWait();
     }
@@ -222,11 +226,12 @@ public class UserManagementView extends VBox {
 
         VBox root = new VBox(14);
         root.setPadding(new Insets(24));
-        root.setStyle("-fx-background-color: #0f172a;");
+        root.getStyleClass().add("content-area");
         root.setPrefSize(340, 260);
 
         Label title = new Label("Reset Password for @" + user.getUsername());
-        title.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 14px; -fx-font-weight: bold;");
+        title.getStyleClass().add("card-title");
+        title.setStyle("-fx-font-size: 14px; -fx-font-weight: bold;");
 
         PasswordField newPassF = new PasswordField();
         newPassF.setPromptText("Enter new password");
@@ -262,6 +267,7 @@ public class UserManagementView extends VBox {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+        ThemeManager.applyCurrentTheme(scene);
         dialog.setScene(scene);
         dialog.showAndWait();
     }

@@ -6,6 +6,7 @@ import com.phoneshop.pos.model.User;
 import com.phoneshop.pos.service.AuthService;
 import com.phoneshop.pos.util.AppSession;
 import com.phoneshop.pos.util.FormatUtil;
+import com.phoneshop.pos.util.ThemeManager;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -35,9 +36,10 @@ public class MainLayout extends BorderPane {
     private UserManagementView userManagementView;
 
     private Button activeNavBtn = null;
+    private Button themeToggleBtn;
 
     public MainLayout() {
-        this.setStyle("-fx-background-color: #0f172a;");
+        this.getStyleClass().add("content-area");
 
         // 1. Top Bar
         this.setTop(createTopBar());
@@ -46,7 +48,7 @@ public class MainLayout extends BorderPane {
         this.setLeft(createSidebar());
 
         // 3. Center Content Pane
-        contentPane.setStyle("-fx-background-color: #0f172a;");
+        contentPane.getStyleClass().add("content-area");
         this.setCenter(contentPane);
 
         // Initial default view
@@ -54,7 +56,7 @@ public class MainLayout extends BorderPane {
     }
 
     private HBox createTopBar() {
-        HBox topBar = new HBox(16);
+        HBox topBar = new HBox(14);
         topBar.getStyleClass().add("top-bar");
         topBar.setAlignment(Pos.CENTER_LEFT);
 
@@ -64,12 +66,21 @@ public class MainLayout extends BorderPane {
 
         // Real-time Clock
         Label clockLabel = new Label();
-        clockLabel.setStyle("-fx-text-fill: #94a3b8; -fx-font-family: 'Consolas', monospace; -fx-font-size: 13px;");
+        clockLabel.setStyle("-fx-font-family: 'Consolas', monospace; -fx-font-size: 13px;");
+        clockLabel.getStyleClass().add("card-subtitle");
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             clockLabel.setText("🕒 " + FormatUtil.formatDateTime(LocalDateTime.now()));
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+
+        // Theme Toggle Button
+        themeToggleBtn = new Button(ThemeManager.isDarkMode() ? "☀️ Light Mode" : "🌙 Dark Mode");
+        themeToggleBtn.getStyleClass().add("theme-toggle-btn");
+        themeToggleBtn.setOnAction(e -> {
+            ThemeManager.toggleTheme();
+            themeToggleBtn.setText(ThemeManager.isDarkMode() ? "☀️ Light Mode" : "🌙 Dark Mode");
+        });
 
         // User Badge
         User current = AppSession.getInstance().getCurrentUser();
@@ -94,7 +105,7 @@ public class MainLayout extends BorderPane {
             Main.showLogin();
         });
 
-        topBar.getChildren().addAll(brandTitle, clockLabel, userBadge, logoutBtn);
+        topBar.getChildren().addAll(brandTitle, clockLabel, themeToggleBtn, userBadge, logoutBtn);
         return topBar;
     }
 

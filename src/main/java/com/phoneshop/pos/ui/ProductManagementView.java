@@ -5,6 +5,7 @@ import com.phoneshop.pos.model.Product;
 import com.phoneshop.pos.util.AppSession;
 import com.phoneshop.pos.util.DialogUtil;
 import com.phoneshop.pos.util.FormatUtil;
+import com.phoneshop.pos.util.ThemeManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -201,11 +202,12 @@ public class ProductManagementView extends VBox {
 
         VBox root = new VBox(14);
         root.setPadding(new Insets(24));
-        root.setStyle("-fx-background-color: #0f172a;");
+        root.getStyleClass().add("content-area");
         root.setPrefSize(540, 680);
 
         Label header = new Label(isEdit ? "Edit Product Information" : "Add New Product to Inventory");
-        header.setStyle("-fx-text-fill: #f8fafc; -fx-font-size: 16px; -fx-font-weight: bold;");
+        header.getStyleClass().add("card-title");
+        header.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
         ScrollPane scroll = new ScrollPane();
         scroll.setFitToWidth(true);
@@ -390,13 +392,14 @@ public class ProductManagementView extends VBox {
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles/app.css").toExternalForm());
+        ThemeManager.applyCurrentTheme(scene);
         dialogStage.setScene(scene);
         dialogStage.showAndWait();
     }
 
     private Label createLabel(String text) {
         Label l = new Label(text);
-        l.setStyle("-fx-text-fill: #cbd5e1; -fx-font-weight: bold; -fx-font-size: 12px;");
+        l.getStyleClass().add("stat-label");
         return l;
     }
 }
