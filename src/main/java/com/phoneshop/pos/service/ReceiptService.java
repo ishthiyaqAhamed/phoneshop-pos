@@ -48,12 +48,12 @@ public class ReceiptService {
         sb.append(dash).append("\n");
 
         for (SaleItem item : sale.getItems()) {
-            sb.append(String.format("%-42s\n", item.getProductName()));
+            sb.append(wrapText(item.getProductName(), width)).append("\n");
             if (item.getImei() != null && !item.getImei().isBlank() && !item.getImei().equalsIgnoreCase("N/A")) {
-                sb.append("  IMEI: ").append(item.getImei()).append("\n");
+                sb.append("  IMEI/SN:  ").append(item.getImei()).append("\n");
             }
             if (item.getWarrantyPeriod() != null && !item.getWarrantyPeriod().isBlank()) {
-                sb.append("  Warranty: [").append(item.getWarrantyPeriod()).append("]\n");
+                sb.append("  Warranty: ").append(item.getWarrantyPeriod()).append("\n");
             }
             sb.append(String.format("  %-18s %3d %16s\n",
                     FormatUtil.formatCurrency(item.getUnitPrice()),

@@ -294,7 +294,7 @@ public class PosTerminalView extends BorderPane {
             SaleItem item = data.getValue();
             String desc = item.getProductName();
             if (item.getWarrantyPeriod() != null && !item.getWarrantyPeriod().isBlank()) {
-                desc += "\n[" + item.getWarrantyPeriod() + "]";
+                desc += "\nWarranty: " + item.getWarrantyPeriod();
             }
             return new SimpleStringProperty(desc);
         });
