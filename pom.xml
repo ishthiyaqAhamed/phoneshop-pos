@@ -87,14 +87,7 @@
             <classifier>${javafx.platform}</classifier>
         </dependency>
 
-        <!-- PostgreSQL JDBC Driver (Neon Cloud Postgres) -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.4</version>
-        </dependency>
-
-        <!-- SQLite Driver (Optional local offline mode fallback) -->
+        <!-- SQLite JDBC Driver (Embedded local database) -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>

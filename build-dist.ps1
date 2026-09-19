@@ -43,6 +43,7 @@ if (Test-Path $jpackagePath) {
     Write-Host " Standalone Native App created at: dist\PhoneShopPOS\PhoneShopPOS.exe" -ForegroundColor Yellow
     Write-Host " (Runs independently on any Windows PC without needing Java!)" -ForegroundColor Gray
     Write-Host "==========================================================" -ForegroundColor Cyan
-} else {
+}
+else {
     Write-Host "Note: jpackage not found, Fat JAR is ready to run with 'java -jar target\pos-1.0.0.jar'" -ForegroundColor Yellow
 }

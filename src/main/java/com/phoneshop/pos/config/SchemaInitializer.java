@@ -13,9 +13,8 @@ public class SchemaInitializer {
     private static final Logger logger = LoggerFactory.getLogger(SchemaInitializer.class);
 
     public static void initializeSchema() {
-        boolean isPg = DatabaseConfig.isPostgres();
-        String autoInc = isPg ? "SERIAL PRIMARY KEY" : "INTEGER PRIMARY KEY AUTOINCREMENT";
-        String timestampType = isPg ? "TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP" : "DATETIME DEFAULT CURRENT_TIMESTAMP";
+        String autoInc = "INTEGER PRIMARY KEY AUTOINCREMENT";
+        String timestampType = "DATETIME DEFAULT CURRENT_TIMESTAMP";
 
         try (Connection conn = DatabaseConfig.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -37,7 +36,7 @@ public class SchemaInitializer {
                     "username VARCHAR(50) NOT NULL, " +
                     "full_name VARCHAR(100) NOT NULL, " +
                     "login_time " + timestampType + ", " +
-                    "logout_time " + (isPg ? "TIMESTAMP WITH TIME ZONE" : "DATETIME") + ", " +
+                    "logout_time DATETIME, " +
                     "last_active_time " + timestampType + ", " +
                     "status VARCHAR(20) DEFAULT 'ACTIVE', " +
                     "shift_sales_total DECIMAL(12, 2) DEFAULT 0.00, " +
